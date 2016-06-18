@@ -11,7 +11,8 @@ CACHE_PATH = 'tile'
 TILE_SIZE = 256
 MAX_ITER = 100
 ESCAPE_RADIUS = 4
-BLACK_COLOR = (0, 0, 0)
+# BLACK_COLOR = (0, 0, 0)
+BLACK_COLOR = (255, 255, 255)
 
 
 class NegativeFloatConverter(FloatConverter):
@@ -46,7 +47,17 @@ GRADIENT = {0: (41, 137, 204),
             64: (217, 159, 0),
             100: (255, 255, 255),
             }
-# GRADIENT = {0: (255, 0, 0), 100: (0, 255, 255)}
+GRADIENT = {0: (255, 0, 0), 100: (0, 255, 255)}
+GRADIENT = {
+    0: (106, 191, 235),
+    25: (185, 211, 195),
+    50: (247, 233, 152),
+    75: (244, 188, 172),
+    100: (244, 149, 179),
+}
+GRADIENT = {0: (14, 21, 101),
+            50: (14, 62, 168),
+            100: (255, 255, 255)}
 COLOR_MAP = gradient2color_map(GRADIENT)
 
 
