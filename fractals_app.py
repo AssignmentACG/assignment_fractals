@@ -61,11 +61,6 @@ GRADIENT = {0: (14, 21, 101),
 COLOR_MAP = gradient2color_map(GRADIENT)
 
 
-@app.route('/', methods=['GET'])
-def homepage():
-    return send_from_directory('static', 'index.html')
-
-
 @app.route('/tile/<string:f_type>_<string:f_formula>_<int:z>_<float:x>_<float:y>.png', methods=['GET'])
 def get_fractals(f_type, f_formula, z, x, y):
     path = os.path.join(CACHE_PATH,
@@ -162,6 +157,16 @@ def make_burning(f_formula, zoom, x, y, path):
             else:
                 draw.point((p_x, p_y), fill=BLACK_COLOR)
     im.save(path)
+
+
+@app.route('/3d/<path:path>')
+def send_static_3d(path):
+    return send_from_directory('static_3d', path)
+
+
+@app.route('/', methods=['GET'])
+def homepage():
+    return send_from_directory('static', 'index.html')
 
 
 @app.route('/<path:path>')
