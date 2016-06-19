@@ -1,6 +1,6 @@
 WIDTH = window.innerWidth
 HEIGHT = window.innerHeight
-ITER = 3
+ITER = 1
 scene = new THREE.Scene()
 
 camera = new THREE.PerspectiveCamera(25, WIDTH / HEIGHT, 1, 20)
@@ -25,7 +25,18 @@ lights[2].position.set(-10, -20, -10);
 scene.add(lights[0]);
 scene.add(lights[1]);
 scene.add(lights[2]);
+spotLight = new THREE.SpotLight(0xffffff);
+spotLight.position.set(10, 10, 10);
+spotLight.castShadow = true;
 
+spotLight.shadow.mapSize.width = 10;
+spotLight.shadow.mapSize.height = 10;
+
+spotLight.shadow.camera.near = 1;
+spotLight.shadow.camera.far = 30;
+spotLight.shadow.camera.fov = 45;
+
+scene.add(spotLight);
 
 renderer = new THREE.WebGLRenderer({antialias: true})
 #renderer = new THREE.WebGLRenderer()
@@ -33,11 +44,7 @@ renderer.setSize(WIDTH, HEIGHT)
 document.body.appendChild(renderer.domElement)
 
 render = ->
-  requestAnimationFrame(render);
-  #  cube.rotation.x += 0.01;
-  #  cube.rotation.y += 0.01;
   renderer.render(scene, camera);
-render()
 
 controls = new THREE.TrackballControls(camera);
 controls.rotateSpeed = 1.0;
@@ -57,7 +64,7 @@ animate()
 
 
 base_geometry = new THREE.BoxGeometry(1, 1, 1);
-material = new THREE.MeshStandardMaterial({color: '#2194ce'})
+material = new THREE.MeshPhongMaterial({color: '#2194ce'})
 transform_vectors_array = [
   [1, 1, 1],
   [1, 1, -1],
@@ -105,6 +112,7 @@ make_fractal = (transform_matrices, base_geometry)->
   result_geometry = new THREE.Geometry()
   for geometry in geometries
     result_geometry.merge(geometry)
+  result_geometry.mergeVertices()
   result_geometry.scale(1 / 3, 1 / 3, 1 / 3)
   return result_geometry
 
@@ -113,4 +121,6 @@ for i in [1..ITER]
   iter_geometry = make_fractal(transform_matrices, iter_geometry)
 cube = new THREE.Mesh(iter_geometry, material);
 scene.add(cube);
+
+render()
 
