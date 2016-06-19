@@ -27,8 +27,8 @@ scene.add(lights[1]);
 scene.add(lights[2]);
 
 
-#renderer = new THREE.WebGLRenderer({antialias: true})
-renderer = new THREE.WebGLRenderer()
+renderer = new THREE.WebGLRenderer({antialias: true})
+#renderer = new THREE.WebGLRenderer()
 renderer.setSize(WIDTH, HEIGHT)
 document.body.appendChild(renderer.domElement)
 
