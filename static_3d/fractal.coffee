@@ -1,6 +1,6 @@
 WIDTH = window.innerWidth
 HEIGHT = window.innerHeight
-ITER = 1
+ITER = 3
 scene = new THREE.Scene()
 
 camera = new THREE.PerspectiveCamera(25, WIDTH / HEIGHT, 1, 20)
